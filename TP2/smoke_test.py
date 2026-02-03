@@ -36,8 +36,8 @@ def main() -> None:
     )
 
     img = out.images[0]
-    os.makedirs("outputs", exist_ok=True)
-    path = os.path.join("outputs", "smoke.png")
+    os.makedirs("TP2/outputs", exist_ok=True)
+    path = os.path.join("TP2/outputs", "smoke.png")
     img.save(path)
     print(f"[smoke] saved: {path}")
 
