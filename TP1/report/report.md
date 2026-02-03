@@ -57,4 +57,12 @@ im7.jpeg — Grillage fin et répétitif, contours difficiles à segmenter (cas 
 
 ## 3
 
-### 3.e
+Model : sam_vit_h_4b8939.pth
+
+yboutkrida@arcadia-slurm-node-1:~/deeplearning-advanced$ python TP1/src/quick_test_sam.py 
+img (189, 267, 3) mask (189, 267) score 0.8512305021286011 mask_sum 9058
+
+L'inférence s'exécute correctement : le modèle `sam_vit_h_4b8939.pth` se charge sur GPU et génère un masque binaire avec une résolution identique à celle de l'image d'entrée.
+Avec ce modèle ViT-H, le temps d'exécution est suffisamment rapide pour une utilisation interactive via l'interface Streamlit.
+La précision du masque dépend considérablement de la qualité de la bounding box fournie : une box imprécise peut inclure des zones non pertinentes.
+Le mode multimask est particulièrement utile dans des cas ambigus, bien qu'une fonctionnalité pour sélectionner automatiquement le meilleur masque reste nécessaire.
