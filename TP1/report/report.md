@@ -44,3 +44,17 @@ port choisi : 8888
 ![alt text](image-1.png)
 
 UI accessible via SSH tunnel : oui
+
+## 2
+
+### b
+
+im1.jpeg — Objet unique bien visible sur fond simple (cas simple, segmentation facile).
+im2.jpeg — Objet principal complexe mais isolé (PC), bon contraste global.
+im4.jpeg — Scène de rue avec plusieurs objets et arrière-plan chargé (cas complexe).
+im6.jpeg — Cuisine avec de nombreux éléments et plans visuels (cas chargé).
+im7.jpeg — Grillage fin et répétitif, contours difficiles à segmenter (cas difficile).
+
+## 3
+
+### 3.e
