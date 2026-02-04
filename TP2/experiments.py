@@ -73,6 +73,49 @@ def run_text2img_experiments() -> None:
         save(img, f"TP2/outputs/t2i_{name}.png")
         print("T2I", name, {"scheduler": scheduler_name, "seed": seed, "steps": steps, "guidance": guidance})
 
+# À insérer dans TP2/experiments.py
+from pipeline_utils import to_img2img
+
+def run_img2img_experiments() -> None:
+    model_id = DEFAULT_MODEL_ID
+    seed = 42
+    scheduler_name = "EulerA"
+    steps = 30
+    guidance = 7.5
+
+    # TODO: fournissez une image source (produit) dans TP2/inputs/
+    init_path = "TP2/inputs/fender.jpg"  # ex: "my_product.jpg"
+
+    prompt = "professional studio photography of a futuristic cyberpunk fender stratocaster, neon lights, glowing circuits, dark background, 8k, highly detailed, product shot"
+    negative = "text, watermark, logo, low quality, blurry, deformed"
+
+    strengths = [
+        ("run07_strength035", 0.35),
+        ("run08_strength060", 0.60),
+        ("run09_strength085", 0.85),  # strength élevé obligatoire
+    ]
+
+    pipe_t2i = load_text2img(model_id, scheduler_name)
+    pipe_i2i = to_img2img(pipe_t2i)
+
+    device = get_device()
+    g = make_generator(seed, device)
+
+    init_image = Image.open(init_path).convert("RGB")
+
+    for name, strength in strengths:
+        out = pipe_i2i(
+            prompt=prompt,
+            image=init_image,
+            strength=strength,
+            negative_prompt=negative,
+            num_inference_steps=steps,
+            guidance_scale=guidance,
+            generator=g,
+        )
+        img = out.images[0]
+        save(img, f"TP2/outputs/i2i_{name}.png")
+        print("I2I", name, {"scheduler": scheduler_name, "seed": seed, "steps": steps, "guidance": guidance, "strength": strength})
+
 if __name__ == "__main__":
-    # main() # Exécute la baseline
-    run_text2img_experiments() # Exécute le plan d'expériences
+    run_img2img_experiments()
