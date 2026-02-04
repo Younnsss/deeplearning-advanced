@@ -44,9 +44,39 @@ Résultats :
 ![](../outputs/i2i_run09_strength085.png)
 
 
-Les structures et formes globales demeurent constantes entre strength 035 et 085, avec des couleurs retranscrites dans le même thème que l'image initiale. Cependant, la guitare est progressivement remplacée par les caractéristiques dominantes de la tour Eiffel, avec son manche prenant l'apparence de ses structures distinctives. Une inscription évoquant "Paris" semble également être ajoutée.
+Les structures et formes globales demeurent constantes entre strength 035 et 085, mais les couleurs changent particulièrement. A 60 seul les couleurs sont modifié alors qu'à 85 c'est même la matière de la guitare qui a l'air différente (mais bizarrement les couleurs sont plus fidèle)
 
-Ces transformations illustrent le potentiel créatif pour la génération d'images commerciales, permettant des ajustements visuels tels que des effets spéciaux, des modifications de fonds ou la correction directe d'anomalies sans recours à un montage complexe.
+Le résultat est peu concluant, dès que la réalisation demande de la créativité, l'IA a été incapable de produire un résultat utilisable.
 
 
 ## 5
+
+
+## 6
+
+
+| Critères | Image #1 (Baseline) | Image #2 (Extreme) | Image #3 (I2I Strength Haut) |
+| :--- | :---: | :---: | :---: |
+| **Prompt adherence** (Fidélité au texte) | 1 | 2 | 0 |
+| **Visual realism** (Réalisme photo) | 2 | 2 | 0 |
+| **Artifacts** (2 = aucun défaut gênant) | 2 | 2 | 0 |
+| **E-commerce usability** (Potentiel commercial) | 2 | 2 | 0 |
+| **Reproducibility** (Paramètres complets) | 2 | 2 | 2 |
+| **TOTAL / 10** | **7 / 10** | **9 / 10** | **3 / 10** |
+
+
+![Text2ImgBaseline](../outputs/t2i_run01_baseline.png)
+
+Image très réaliste, proche de qualité photographique. Convient presque parfaitement pour une publication.
+
+![BasseGuidance](../outputs/t2i_run04_guid4.png)
+
+Image super réaliste très proche du prompt originel répond à toutes les attentes, très convaincant.
+
+![StrengthElevee](../outputs/i2i_run09_strength085.png)
+
+Pas du tout convaincant mais cela demandais un gros effort de créativité, on a largement dépassé les capacités de l'IA
+
+Les paramètres influencent un compromis clair qualité vs latence/coût : augmenter num_inference_steps ou choisir certains schedulers améliore parfois la netteté et la stabilité, mais augmente linéairement le temps de génération et donc le coût GPU. À l’inverse, réduire steps accélère mais dégrade souvent les détails et augmente les artefacts.
+La reproductibilité dépend au minimum du couple, de la seed, des steps, du guidance, de la résolution. Elle peut casser si la version des librairies change, si le modèle est mis à jour côté hub, ou si on ne fixe pas correctement le générateur.
+En e-commerce, les risques principaux sont les hallucinations, des images trompeuses, et la conformité. Pour limiter ces risques, je privilégierais strength modéré, j’ajouterais des filtres, un contrôle humain, et je n’autoriserais la publication que sur des images validées ou retouchées, avec traçabilité complète des configs.

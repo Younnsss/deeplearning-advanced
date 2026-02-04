@@ -45,3 +45,63 @@ if mode == "Img2Img":
         st.image(init_image, caption="Input image", use_container_width=True)
 
 run = st.button("Generate", type="primary")
+
+# À placer après le bloc UI dans TP2/app.py
+
+if run:
+    if mode == "Img2Img" and init_image is None:
+        st.error("Please upload an input image for Img2Img.")
+        st.stop()
+
+    pipe_t2i = get_text2img_pipe(model_id, scheduler_name)
+    device = get_device()
+    g = make_generator(int(seed), device)
+
+    if mode == "Text2Img":
+        out = pipe_t2i(
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            num_inference_steps=steps,
+            guidance_scale=guidance,
+            height=512,
+            width=512,
+            generator=g,
+        )
+        img = out.images[0]
+        config = {
+            "mode": "Text2Img",
+            "model_id": model_id,
+            "scheduler": scheduler_name,
+            "seed": int(seed),
+            "steps": int(steps),
+            "guidance": float(guidance),
+            "height": 512,
+            "width": 512,
+        }
+    else:
+        pipe_i2i = to_img2img(pipe_t2i)
+        out = pipe_i2i(
+            prompt=prompt,
+            image=init_image,
+            strength=strength,
+            negative_prompt=negative_prompt,
+            num_inference_steps=steps,
+            guidance_scale=guidance,
+            generator=g,
+        )
+        img = out.images[0]
+        config = {
+            "mode": "Img2Img",
+            "model_id": model_id,
+            "scheduler": scheduler_name,
+            "seed": int(seed),
+            "steps": int(steps),
+            "guidance": float(guidance),
+            "strength": float(strength),
+            "height": 512,
+            "width": 512,
+        }
+
+    st.image(img, caption=f"{config['mode']} | {config['scheduler']} | seed={config['seed']}", use_container_width=True)
+    st.subheader("Config (for reproducibility)")
+    st.json(config)
