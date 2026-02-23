@@ -1,6 +1,9 @@
 import torch
 import torchaudio
 
+# Explicitly set backend to avoid torchcodec dependency issues on recent torchaudio versions
+torchaudio.set_audio_backend("soundfile")
+
 def rms(x: torch.Tensor) -> float:
     return float(torch.sqrt(torch.mean(x ** 2)).item())
 
@@ -11,7 +14,7 @@ def main():
     path = "TP3/data/call_01.wav"
     wav, sr = torchaudio.load(path)          # wav: [channels, time]
     wav = wav.mean(dim=0, keepdim=True)      # force mono [1, time]
-    num_samples = wav.shape[0]
+    num_samples = wav.shape[1]
     duration_s = num_samples / sr
 
     print("path:", path)
