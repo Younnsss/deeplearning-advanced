@@ -25,3 +25,10 @@ TP4
 ### G
 
 Les métriques des 3 datasets sont calculées séparément afin de s'assurer qu'il n'y ait pas de fuite de données, comme un entraînement du modèle sur les données de test. Cela permet également d'évaluer si le modèle généralise bien ou s'il sur-apprend les données de validation.
+
+### H
+
+![alt text](img/image-2.png)
+
+# Exercice3
+
