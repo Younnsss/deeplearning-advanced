@@ -1,0 +1,62 @@
+{
+  "audio_path": "TP3/data/call_01.wav",
+  "model_id": "openai/whisper-tiny",
+  "device": "cpu",
+  "audio_duration_s": 51.09725,
+  "elapsed_s": 11.924022674560547,
+  "rtf": 0.2333593818563728,
+  "pii_stats": {
+    "emails": 2,
+    "phones": 0,
+    "orders": 0
+  },
+  "intent_scores": {
+    "refund_or_replacement": 4,
+    "delivery_issue": 3,
+    "general_support": 4
+  },
+  "intent": "refund_or_replacement",
+  "top_terms": [
+    [
+      "thank",
+      2
+    ],
+    [
+      "would",
+      2
+    ],
+    [
+      "number",
+      2
+    ],
+    [
+      "redacted",
+      2
+    ],
+    [
+      "email",
+      2
+    ],
+    [
+      "hello",
+      1
+    ],
+    [
+      "calling",
+      1
+    ],
+    [
+      "customer",
+      1
+    ],
+    [
+      "support",
+      1
+    ],
+    [
+      "name",
+      1
+    ]
+  ],
+  "redacted_text": "hello? thank you 4 calling customer support.my name is alex.and i would have put today.im cutting about another.that the row is damaged.the package was delivered yesterday.but the screen is cracked.i would like 2 refund.are replacements.as soon as possible.the other number is a.x.1.9.7.3.5.you can reach [REDACTED_EMAIL][REDACTED_EMAIL] so? my phone number is 5.bye.5.0.1.9 9 thank you."
+}
